@@ -1,26 +1,106 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer components {
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Global Layout Container */
+  .app-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Main & Section Backgrounds */
+  .main-bg {
+    @apply bg-[#FAFAFA] dark:bg-zinc-950 transition-colors duration-300;
+  }
+
+  .section-bg {
+    @apply bg-white dark:bg-zinc-900 transition-colors duration-300;
+  }
+
+  .footer-bg {
+    @apply bg-[#051C1A] text-zinc-300;
+    /* Deep Teal/Black from the footer UI */
+  }
+
+  .navbar-bg {
+    @apply bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-b border-zinc-100 dark:border-zinc-800 sticky top-0 z-50;
+  }
+
+  /* Typography */
+  .text-primary {
+    @apply text-zinc-900 dark:text-zinc-50 font-sans tracking-tight;
+  }
+
+  .text-secondary {
+    @apply text-zinc-500 dark:text-zinc-400 text-sm;
+  }
+
+  /* Premium Buttons */
+  .button-primary {
+    @apply bg-[#028A65] hover:bg-[#027354] text-white px-5 py-2.5 rounded-xl text-sm font-semibold inline-flex items-center justify-center gap-2 transition-all duration-300 active:scale-98 cursor-pointer shadow-xs;
+  }
+
+  .button-outline {
+    @apply border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 active:scale-98 cursor-pointer;
+  }
+
+  .button-icon {
+    @apply p-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 transition-all cursor-pointer;
+  }
+
+  /* Components: Premium Cards */
+  .card-primary {
+    @apply bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800/60 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-zinc-100/50 dark:hover:shadow-none flex flex-col;
+  }
+
+  /* Form Elements */
+  .input-primary {
+    @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-50 rounded-xl px-4 py-2.5 text-sm outline-none transition-all duration-200 focus:border-[#028A65] focus:ring-2 focus:ring-[#028A65]/10;
+  }
+
+  .filter-sidebar {
+    @apply bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl p-6 shadow-xs;
+  }
+
+  /* Badges */
+  .badge-category {
+    @apply px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider w-fit;
+  }
+
+  /* Navigation Links */
+  .nav-item {
+    @apply text-zinc-500 dark:text-zinc-400 font-medium hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors py-2 px-1 relative cursor-pointer text-sm;
+  }
+
+  .nav-item-active {
+    @apply text-zinc-900 dark:text-zinc-50 font-semibold after:content-[''] after:absolute after:bottom-[-20px] after:left-0 after:w-full after:h-0.5 after:bg-[#028A65] after:rounded-full;
+  }
+
+  /* Avatar Premium Border & Wrapper */
+  .avatar-premium {
+    @apply rounded-full border border-zinc-200 dark:border-zinc-800 transition-all p-0.5 flex items-center justify-center;
+  }
+
+  /* Mobile Drawer Overlay & Layout */
+  .mobile-drawer-overlay {
+    @apply fixed inset-0 z-50 bg-black/45 backdrop-blur-xs transition-opacity duration-300 md:hidden;
+  }
+
+  .mobile-drawer {
+    @apply fixed top-0 right-0 bottom-0 z-50 w-3/4 max-w-xs bg-white dark:bg-zinc-900 p-6 flex flex-col gap-6 shadow-2xl transition-transform duration-300 ease-in-out md:hidden border-l border-zinc-100 dark:border-zinc-800;
+  }
+
+  /* Logo Icon */
+  .logo-icon {
+    @apply text-[#028A65] transform rotate-[350deg];
+  }
+
+  /* Mobile Navigation Links */
+  .mobile-nav-item {
+    @apply text-zinc-500 dark:text-zinc-400 font-medium pl-3 py-1.5 transition-colors cursor-pointer text-sm;
+  }
+
+  .mobile-nav-item-active {
+    @apply text-zinc-900 dark:text-zinc-50 font-bold pl-3 border-l-2 border-[#028A65] cursor-pointer text-sm;
+  }
 }

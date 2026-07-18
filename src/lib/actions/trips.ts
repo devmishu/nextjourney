@@ -22,6 +22,6 @@ export const createTrip = async (newTrip: TripData) => {
 }
 
 export const deleteTrip = async (tripId: string) => {
-    revalidatePath('/manage-trips')
-    return serverDelete(`/api/trip/${tripId}`);
+    revalidatePath('/my-trips')
+    return serverDelete(`/api/trips/${tripId}`);
 }

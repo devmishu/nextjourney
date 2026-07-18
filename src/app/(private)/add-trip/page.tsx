@@ -38,8 +38,10 @@ export default async function AddEventPage() {
     };
 
     await createTrip(newTrip);
-    redirect("/manage-trips");
+    redirect("/my-trips");
   }
 
-  return <AddTripForm userName={user.name ?? "Traveler"} action={handleCreateTrip} />;
+  return (
+    <AddTripForm userName={user.name ?? "Traveler"} action={handleCreateTrip} />
+  );
 }

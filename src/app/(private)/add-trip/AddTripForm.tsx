@@ -18,6 +18,7 @@ import {
 import { FaCompass } from "react-icons/fa6";
 import { MdOutlineTravelExplore } from "react-icons/md";
 import toast from "react-hot-toast"; // ১. ইম্পোর্ট করা হয়েছে
+import { redirect } from "next/navigation";
 
 interface AddTripFormProps {
   userName: string;
@@ -94,16 +95,20 @@ export function AddTripForm({ userName, action }: AddTripFormProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsPending(true);
+
     const formData = new FormData(e.currentTarget);
 
     try {
+      // সার্ভার অ্যাকশন কল করুন
+      const result = await action(formData);
+
+      // যদি রেজাল্ট সফল হয়
+      toast.success("Trip added successfully! ✈️");
       
-      await toast.promise(action(formData), {
-        loading: "Publishing your amazing trip...",
-        success: "Trip added successfully! ✈️",
-        error: "Failed to create trip. Please try again.",
-      });
+      // ফর্ম রিসেট বা অন্যান্য কাজ এখানে করুন
+      formRef.current?.reset();
     } catch (error) {
+      // যদি কোনো এরর হয়
       console.error(error);
     } finally {
       setIsPending(false);

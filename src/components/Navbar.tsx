@@ -31,7 +31,7 @@ export function Navbar() {
   ];
 
   const navLinks = user
-    ? [...baseLinks, { name: "My Trips", path: "/manage-trips" }]
+    ? [...baseLinks, { name: "My Trips", path: "/my-trips" }]
     : baseLinks;
 
   

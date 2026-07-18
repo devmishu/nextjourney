@@ -25,16 +25,16 @@ export function Navbar() {
 
   const baseLinks = [
     { name: "Home", path: "/" },
-    { name: "Explore Trips", path: "/explore-trips" },
+    { name: "Trips", path: "/trips" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
 
   const navLinks = user
-    ? [...baseLinks, { name: "Manage Trips", path: "/manage-trips" }]
+    ? [...baseLinks, { name: "My Trips", path: "/manage-trips" }]
     : baseLinks;
 
-  // ইউজার নামের শর্টকাট জেনারেট করার জন্য হেল্পার (যেমন: Mishu Debnath -> MD)
+  
   const getInitials = (name?: string) => {
     if (!name) return "U";
     return name

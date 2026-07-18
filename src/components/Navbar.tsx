@@ -34,6 +34,17 @@ export function Navbar() {
     ? [...baseLinks, { name: "Manage Trips", path: "/manage-trips" }]
     : baseLinks;
 
+  // ইউজার নামের শর্টকাট জেনারেট করার জন্য হেল্পার (যেমন: Mishu Debnath -> MD)
+  const getInitials = (name?: string) => {
+    if (!name) return "U";
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <header className="navbar-bg sticky top-0 z-50 w-full backdrop-blur-md ">
       <div className="app-container flex h-16 items-center justify-between">
@@ -56,7 +67,7 @@ export function Navbar() {
               <Link
                 key={link.path}
                 href={link.path}
-                prefetch={true} // পারফরম্যান্স ও ক্লায়েন্ট সাইড রাউটিং বুস্ট করার জন্য
+                prefetch={true}
                 className={isActive ? "nav-item-active" : "nav-item"}
               >
                 {link.name}
@@ -71,28 +82,29 @@ export function Navbar() {
             <div className="w-8 h-8 bg-zinc-100 dark:bg-zinc-800 animate-pulse rounded-full" />
           ) : user ? (
             <>
-              {/* ফিক্সড: Link এর ভেতর থেকে button ট্যাগ রিমুভ করে সরাসরি Link এ ক্লাস দেওয়া হয়েছে */}
               <Link
-                href="/add-event"
+                href="/add-trip"
                 className="button-primary inline-flex items-center gap-2"
               >
                 Add Trip
                 <FiPlus size={16} />
               </Link>
 
-              {/* ফিক্সড: টাইপ ডিক্লেয়ার করা হয়েছে যেন সাবমিট ট্রিগার না করে */}
+              {/* ফিক্সড: HeroUI এর স্ট্রাকচার অনুযায়ী কম্পোনেন্ট ইমপ্লিমেন্ট করা হয়েছে */}
               <button
                 type="button"
                 className="outline-hidden cursor-pointer active:scale-95 transition-transform rounded-full ring-2 ring-zinc-100 hover:ring-[var(--primary)] p-0.5"
               >
-                <Avatar
-                  src={
-                    user?.image ||
-                    "https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
-                  }
-                  name={user?.name || "User Profile"}
-                  className="w-8 h-8 cursor-pointer"
-                />
+                <Avatar className="w-8 h-8 cursor-pointer">
+                  <Avatar.Image
+                    alt={user?.name || "User Profile"}
+                    src={
+                      user?.image ||
+                      "https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+                    }
+                  />
+                  <Avatar.Fallback>{getInitials(user?.name)}</Avatar.Fallback>
+                </Avatar>
               </button>
 
               <button
@@ -113,7 +125,6 @@ export function Navbar() {
               >
                 Login
               </Link>
-              {/* ফিক্সড: Link এর ভেতর থেকে button ট্যাগ সরিয়ে সরাসরি ক্লাস দেওয়া হয়েছে */}
               <Link
                 href="/register"
                 className="inline-flex items-center justify-center h-9 px-4 rounded-xl font-bold text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-sm cursor-pointer transition-colors"
@@ -128,14 +139,17 @@ export function Navbar() {
         <div className="flex md:hidden items-center gap-3">
           {user && (
             <div className="avatar-premium shadow-xs">
-              <Avatar
-                src={
-                  user?.image ||
-                  "https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
-                }
-                name={user?.name || "User Profile"}
-                className="w-7 h-7 cursor-pointer"
-              />
+              {/* ফিক্সড: মোবাইল মেনুর ভেতরের Avatar-ও HeroUI স্ট্রাকচারে আপডেট করা হয়েছে */}
+              <Avatar className="w-7 h-7 cursor-pointer">
+                <Avatar.Image
+                  alt={user?.name || "User Profile"}
+                  src={
+                    user?.image ||
+                    "https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+                  }
+                />
+                <Avatar.Fallback>{getInitials(user?.name)}</Avatar.Fallback>
+              </Avatar>
             </div>
           )}
 
@@ -191,9 +205,8 @@ export function Navbar() {
             <div className="mt-auto pt-6 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col gap-4">
               {user ? (
                 <>
-                  {/* ফিক্সড: Link এর ভেতর থেকে button ট্যাগ সরানো হয়েছে */}
                   <Link
-                    href="/add-event"
+                    href="/add-trip"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="button-primary w-full py-3 inline-flex items-center justify-center gap-2"
                   >

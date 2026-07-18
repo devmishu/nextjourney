@@ -32,18 +32,22 @@ function buildServerQuery(
   return qs.toString();
 }
 
+interface PageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
 /* -- Page -- */
-export default async function TripsPage({
-  searchParams,
-}: {
-  searchParams: Record<string, string | string[] | undefined>;
-}) {
+export default async function TripsPage({ searchParams }: PageProps) {
+  // Next.js 16+ এর নিয়ম অনুযায়ী searchParams প্রোমিসটিকে আনর‍্যাপ করার জন্য await করা হলো
+  const resolvedSearchParams = await searchParams;
+
   // Server‑side fetch using the incoming query parameters
   let initialTrips: Awaited<ReturnType<typeof getTrips>>["result"] = [];
   let initialTotal = 0;
 
   try {
-    const queryString = buildServerQuery(searchParams);
+    // এখানে সরাসরি searchParams না পাঠিয়ে await করা resolvedSearchParams পাঠানো হয়েছে
+    const queryString = buildServerQuery(resolvedSearchParams);
     const data = await getTrips(queryString);
     initialTrips = data.result;
     initialTotal = data.total;
@@ -53,7 +57,7 @@ export default async function TripsPage({
 
   return (
     <>
-      <HeroSection/>
+      <HeroSection />
       <TripsClientShell
         initialTrips={initialTrips}
         initialTotal={initialTotal}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiFilter, FiChevronDown, FiSearch, FiX } from "react-icons/fi";
 
 /* ── Static filter data ─────────────────────────────────────────── */
@@ -56,7 +56,6 @@ interface FilterSidebarProps {
   filters: FilterState;
   onChange: (filters: FilterState) => void;
   onReset: () => void;
-  /** Category→count map from the results */
   categoryCounts?: Record<string, number>;
   travelStyleCounts?: Record<string, number>;
 }
@@ -78,7 +77,7 @@ function AccordionSection({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="flex w-full items-center justify-between py-3 text-sm font-semibold text-primary cursor-pointer hover:opacity-75 transition-opacity"
+        className="flex w-full items-center justify-between py-3 text-sm font-semibold text-zinc-900 dark:text-zinc-100 cursor-pointer hover:opacity-75 transition-opacity"
         aria-expanded={open}
       >
         <span>{title}</span>
@@ -109,31 +108,29 @@ function CheckItem({
   onToggle: () => void;
 }) {
   return (
-    <label className="flex items-center justify-between gap-2 cursor-pointer group select-none py-0.5">
-      <div className="flex items-center gap-2.5">
-        {/* Custom checkbox */}
+    <div
+      onClick={onToggle}
+      className="flex items-center justify-between gap-2 cursor-pointer group select-none py-1 px-1.5 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800/40 transition-colors"
+    >
+      <div className="flex items-center gap-2.5 w-full">
+        <input type="checkbox" checked={checked} readOnly className="sr-only" />
         <div
-          role="checkbox"
-          aria-checked={checked}
-          tabIndex={0}
-          onClick={onToggle}
-          onKeyDown={(e) => e.key === " " && onToggle()}
           className={`w-4 h-4 rounded flex items-center justify-center border transition-all duration-150 shrink-0 ${
             checked
-              ? "border-[var(--primary)] bg-[var(--primary)]"
-              : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 group-hover:border-[var(--primary)]"
+              ? "border-zinc-900 bg-zinc-900 dark:border-zinc-100 dark:bg-zinc-100"
+              : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 group-hover:border-zinc-400 dark:group-hover:border-zinc-500"
           }`}
         >
           {checked && (
             <svg
               viewBox="0 0 10 8"
               fill="none"
-              className="w-2.5 h-2 text-white"
+              className="w-2.5 h-2 text-white dark:text-zinc-950"
             >
               <path
                 d="M1 4l3 3 5-6"
                 stroke="currentColor"
-                strokeWidth="1.8"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -143,8 +140,8 @@ function CheckItem({
         <span
           className={`text-xs font-medium transition-colors ${
             checked
-              ? "text-zinc-900 dark:text-zinc-50"
-              : "text-secondary group-hover:text-zinc-700 dark:group-hover:text-zinc-300"
+              ? "text-zinc-900 dark:text-zinc-50 font-semibold"
+              : "text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-200"
           }`}
         >
           {label}
@@ -154,19 +151,14 @@ function CheckItem({
         <span
           className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-md tabular-nums transition-colors ${
             checked
-              ? "text-white"
+              ? "text-white bg-zinc-900 dark:text-zinc-950 dark:bg-zinc-100"
               : "text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800"
           }`}
-          style={
-            checked
-              ? { backgroundColor: "var(--primary)" }
-              : {}
-          }
         >
           {count}
         </span>
       )}
-    </label>
+    </div>
   );
 }
 
@@ -178,6 +170,22 @@ export function FilterSidebar({
   categoryCounts = {},
   travelStyleCounts = {},
 }: FilterSidebarProps) {
+  const [searchTerm, setSearchTerm] = useState(filters.destinationSearch);
+
+  useEffect(() => {
+    setSearchTerm(filters.destinationSearch);
+  }, [filters.destinationSearch]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchTerm !== filters.destinationSearch) {
+        onChange({ ...filters, destinationSearch: searchTerm });
+      }
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, onChange, filters]);
+
   const hasActiveFilters =
     filters.location !== "All Locations" ||
     filters.categories.length > 0 ||
@@ -199,20 +207,16 @@ export function FilterSidebar({
   }
 
   return (
-    <aside className="filter-sidebar flex flex-col gap-0">
+    <aside className="filter-sidebar flex flex-col gap-0 w-full">
       {/* Header */}
       <div className="flex items-center justify-between mb-4 pb-4 border-b border-zinc-100 dark:border-zinc-800">
         <div className="flex items-center gap-2">
-          <FiFilter
-            className="text-sm"
-            style={{ color: "var(--primary)" }}
-          />
-          <span className="text-primary text-sm font-bold">Filters</span>
+          <FiFilter className="text-sm text-zinc-900 dark:text-zinc-100" />
+          <span className="text-zinc-900 dark:text-zinc-100 text-sm font-bold">
+            Filters
+          </span>
           {hasActiveFilters && (
-            <span
-              className="text-[10px] font-bold px-1.5 py-0.5 rounded-full text-white"
-              style={{ backgroundColor: "var(--primary)" }}
-            >
+            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full text-white bg-zinc-900 dark:text-zinc-950 dark:bg-zinc-100">
               {filters.categories.length +
                 filters.travelStyles.length +
                 (filters.location !== "All Locations" ? 1 : 0) +
@@ -223,9 +227,11 @@ export function FilterSidebar({
         {hasActiveFilters && (
           <button
             type="button"
-            onClick={onReset}
-            className="text-xs font-semibold cursor-pointer transition-opacity hover:opacity-75"
-            style={{ color: "var(--primary)" }}
+            onClick={() => {
+              setSearchTerm("");
+              onReset();
+            }}
+            className="text-xs font-semibold cursor-pointer transition-opacity hover:opacity-75 text-zinc-900 dark:text-zinc-100 underline underline-offset-4"
           >
             Reset All
           </button>
@@ -234,25 +240,26 @@ export function FilterSidebar({
 
       {/* Destination Search */}
       <div className="mb-4 pb-4 border-b border-zinc-100 dark:border-zinc-800">
-        <p className="text-primary text-xs font-semibold mb-2 uppercase tracking-wider">
+        <p className="text-zinc-900 dark:text-zinc-100 text-xs font-semibold mb-2 uppercase tracking-wider">
           Search Destination
         </p>
         <div className="relative">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 text-xs pointer-events-none" />
           <input
             type="text"
-            value={filters.destinationSearch}
-            onChange={(e) =>
-              onChange({ ...filters, destinationSearch: e.target.value })
-            }
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="e.g. Bali, Paris..."
-            className="input-primary w-full pl-8 pr-7 h-9 text-xs"
+            className="w-full pl-8 pr-7 h-9 text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-hidden focus:border-zinc-400 dark:focus:border-zinc-500 transition-colors"
           />
-          {filters.destinationSearch && (
+          {searchTerm && (
             <button
               type="button"
-              onClick={() => onChange({ ...filters, destinationSearch: "" })}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 cursor-pointer"
+              onClick={() => {
+                setSearchTerm("");
+                onChange({ ...filters, destinationSearch: "" });
+              }}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 cursor-pointer"
             >
               <FiX className="text-xs" />
             </button>
@@ -263,47 +270,46 @@ export function FilterSidebar({
       {/* Location Select */}
       <AccordionSection title="Location" defaultOpen={true}>
         <div className="flex flex-col gap-1">
-          {LOCATIONS.map((loc) => (
-            <label
-              key={loc}
-              className="flex items-center gap-2.5 cursor-pointer group py-0.5 select-none"
-            >
-              <input
-                type="radio"
-                name="trip-location"
-                value={loc}
-                checked={filters.location === loc || (loc === "All Locations" && !filters.location)}
-                onChange={() => onChange({ ...filters, location: loc })}
-                className="sr-only"
-              />
+          {LOCATIONS.map((loc) => {
+            const isSelected =
+              filters.location === loc ||
+              (loc === "All Locations" && !filters.location);
+            return (
               <div
-                className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${
-                  filters.location === loc ||
-                  (loc === "All Locations" && !filters.location)
-                    ? "border-[var(--primary)]"
-                    : "border-zinc-300 dark:border-zinc-600 group-hover:border-[var(--primary)]"
-                }`}
+                key={loc}
+                onClick={() => onChange({ ...filters, location: loc })}
+                className="flex items-center gap-2.5 cursor-pointer group py-1 px-1.5 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800/40 transition-colors select-none"
               >
-                {(filters.location === loc ||
-                  (loc === "All Locations" && !filters.location)) && (
-                  <div
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: "var(--primary)" }}
-                  />
-                )}
+                <input
+                  type="radio"
+                  name="trip-location"
+                  checked={isSelected}
+                  readOnly
+                  className="sr-only"
+                />
+                <div
+                  className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${
+                    isSelected
+                      ? "border-zinc-900 dark:border-zinc-100"
+                      : "border-zinc-300 dark:border-zinc-600 group-hover:border-zinc-400 dark:group-hover:border-zinc-500"
+                  }`}
+                >
+                  {isSelected && (
+                    <div className="w-2 h-2 rounded-full bg-zinc-900 dark:bg-zinc-100" />
+                  )}
+                </div>
+                <span
+                  className={`text-xs font-medium truncate ${
+                    isSelected
+                      ? "text-zinc-900 dark:text-zinc-50 font-semibold"
+                      : "text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-200"
+                  }`}
+                >
+                  {loc}
+                </span>
               </div>
-              <span
-                className={`text-xs font-medium truncate ${
-                  filters.location === loc ||
-                  (loc === "All Locations" && !filters.location)
-                    ? "text-zinc-900 dark:text-zinc-50 font-semibold"
-                    : "text-secondary group-hover:text-zinc-700"
-                }`}
-              >
-                {loc}
-              </span>
-            </label>
-          ))}
+            );
+          })}
         </div>
       </AccordionSection>
 

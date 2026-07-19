@@ -28,13 +28,13 @@ export function Navbar() {
     { name: "Trips", path: "/trips" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
+    { name: "Analyze Budget", path: "/analyze-buget" },
   ];
 
   const navLinks = user
     ? [...baseLinks, { name: "My Trips", path: "/my-trips" }]
     : baseLinks;
 
-  
   const getInitials = (name?: string) => {
     if (!name) return "U";
     return name

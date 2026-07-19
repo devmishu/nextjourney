@@ -100,7 +100,7 @@ export function AddTripForm({ userName, action }: AddTripFormProps) {
 
     try {
       // সার্ভার অ্যাকশন কল করুন
-      const result = await action(formData);
+      await action(formData);
 
       // যদি রেজাল্ট সফল হয়
       toast.success("Trip added successfully! ✈️");

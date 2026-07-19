@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/Footer";
+import AIChatButton from "@/components/AIChatButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      data-theme="light"
+      data-theme="dark"
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
@@ -36,6 +37,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Toaster />
+        <AIChatButton />
       </body>
     </html>
   );

@@ -1,11 +1,11 @@
-// src/components/HeroBanner.tsx
-"use client"; // যেহেতু এটি ক্লায়েন্ট সাইড অ্যানিমেশন, তাই এই লাইনটি জরুরি
+
+"use client"; 
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
-import { motion } from "framer-motion"; // ১. Framer Motion ইম্পোর্ট করুন
+import { motion } from "framer-motion"; 
 
 export default function HeroBanner() {
-  // অ্যানিমেশন কনফিগারেশন
+ 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -30,7 +30,8 @@ export default function HeroBanner() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop')",
+          
+            "url('./images/home-banner.jpg')",
         }}
         aria-hidden="true"
       />

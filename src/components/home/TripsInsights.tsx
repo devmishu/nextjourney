@@ -14,7 +14,7 @@ import {
 import { FiTrendingUp } from "react-icons/fi";
 import { getTrips } from "@/lib/apis/trips";
 
-// আপনার দেওয়া আপডেট করা ইন্টারফেস
+
 interface TripData {
   _id: string;
   userId: string;
@@ -87,7 +87,7 @@ export default function TripsInsights() {
                   tick={{ fill: "currentColor", fontSize: 10 }}
                   className="text-secondary"
                   tickLine={false}
-                  interval={0} // সব নাম দেখানোর জন্য
+                  interval={0} 
                 />
                 <YAxis
                   tick={{ fill: "currentColor", fontSize: 12 }}

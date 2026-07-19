@@ -40,7 +40,7 @@ export default function WhyTrustUs() {
   return (
     <section className=" py-16 md:py-24 transition-colors duration-300">
       <div className="app-container">
-        {/* হেডার এবং সাবটাইটেল সেন্টার করা হয়েছে */}
+       
         <div className="max-w-2xl mx-auto text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-black text-primary mb-4 tracking-tight">
             Why Travelers & Attendees Trust NextJourney
@@ -51,7 +51,7 @@ export default function WhyTrustUs() {
           </p>
         </div>
 
-        {/* ফিচার গ্রিড */}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {trustFeatures.map((feature, index) => (
             <div

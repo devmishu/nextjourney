@@ -14,9 +14,9 @@ const AIChatWindow: React.FC<ChatWindowProps> = ({ onClose }) => {
   ]);
   const [loading, setLoading] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null); // অটো-স্ক্রল লজিকের জন্য
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  // নতুন মেসেজ আসলে অটোমেটিক নিচে স্ক্রল হবে
+ 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -45,7 +45,7 @@ const AIChatWindow: React.FC<ChatWindowProps> = ({ onClose }) => {
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { role: "ai", text: "দুঃখিত, এই মুহূর্তে সার্ভারে সমস্যা হচ্ছে।" },
+        { role: "ai", text: "Sorry, there is a problem with the server at the moment." },
       ]);
     } finally {
       setLoading(false);

@@ -1,4 +1,3 @@
-"use client";
 
 import React from "react";
 import { FiSearch, FiCalendar, FiCheckCircle } from "react-icons/fi";

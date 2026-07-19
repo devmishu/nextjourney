@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import {
   FiShield,
@@ -10,13 +9,12 @@ import {
   FiMapPin,
   FiClock,
   FiFacebook,
-  FiInstagram,
-  FiTwitter,
-  FiYoutube,
-} from "react-icons/fi"; 
+  FiLinkedin,
+  FiGithub,
+} from "react-icons/fi";
 import { FaPlaneDeparture } from "react-icons/fa";
 import { RiVisaLine, RiMastercardFill, RiPaypalFill } from "react-icons/ri";
-import { SiAmericanexpress } from "react-icons/si"; 
+import { SiAmericanexpress } from "react-icons/si";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -107,12 +105,18 @@ export default function Footer() {
             {/* Socials */}
             <div className="flex items-center gap-3 pt-2">
               {[
-                { icon: <FiFacebook />, href: "#" },
-                { icon: <FiInstagram />, href: "#" },
-                { icon: <FiTwitter />, href: "#" },
-                { icon: <FiYoutube />, href: "#" },
+                {
+                  icon: <FiLinkedin />,
+                  href: "https://www.linkedin.com/in/mishudeb",
+                },
+                { icon: <FiGithub />, href: "https://github.com/devmishu" },
+                {
+                  icon: <FiFacebook />,
+                  href: "https://www.facebook.com/devmishunath",
+                },
               ].map((social, i) => (
                 <a
+                  target="blanck"
                   key={i}
                   href={social.href}
                   className="w-8 h-8 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-transparent hover:bg-zinc-50 dark:hover:bg-zinc-900 flex items-center justify-center text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
@@ -133,74 +137,20 @@ export default function Footer() {
             </div>
             <ul className="space-y-2 text-xs font-medium">
               {[
-                "All Trips",
-                "Destinations",
-                "Travel Guides",
-                "Special Offers",
-                "Blog",
-              ].map((item) => (
-                <li key={item}>
+                { name: "Home", path: "/" },
+                { name: "Trips", path: "/trips" },
+                { name: "About", path: "/about" },
+                { name: "Contact", path: "/contact" },
+                { name: "Analyze Buget", path: "/analyze-buget" },
+                { name: "Add Trip", path: "/add-trip" },
+                { name: "My Trip", path: "/my-trips" },
+              ].map((link) => (
+                <li key={link.name}>
                   <Link
-                    href="#"
+                    href={link.path}
                     className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
                   >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Links Column 2: Company (2 Cols) */}
-          <div className="lg:col-span-2 space-y-3.5">
-            <div>
-              <h5 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
-                Company
-              </h5>
-              <div className="w-6 h-[2px] bg-zinc-900 dark:bg-zinc-100 mt-1 rounded-full" />
-            </div>
-            <ul className="space-y-2 text-xs font-medium">
-              {[
-                "About Us",
-                "Our Services",
-                "How It Works",
-                "Careers",
-                "Contact Us",
-              ].map((item) => (
-                <li key={item}>
-                  <Link
-                    href="#"
-                    className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Links Column 3: Support (2 Cols) */}
-          <div className="lg:col-span-2 space-y-3.5">
-            <div>
-              <h5 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
-                Support
-              </h5>
-              <div className="w-6 h-[2px] bg-zinc-900 dark:bg-zinc-100 mt-1 rounded-full" />
-            </div>
-            <ul className="space-y-2 text-xs font-medium">
-              {[
-                "Help Center",
-                "FAQs",
-                "Terms & Conditions",
-                "Privacy Policy",
-                "Refund Policy",
-              ].map((item) => (
-                <li key={item}>
-                  <Link
-                    href="#"
-                    className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                  >
-                    {item}
+                    {link.name}
                   </Link>
                 </li>
               ))}

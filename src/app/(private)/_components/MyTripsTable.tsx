@@ -20,7 +20,7 @@ export default function MyTripsTable({
         <thead>
           <tr className="bg-neutral-50 dark:bg-zinc-900/50">
             <th className="w-12 text-center py-4 px-4 border-b border-neutral-100 dark:border-neutral-800 rounded-l-2xl text-neutral-500 dark:text-zinc-400 font-bold text-xs">
-              #
+              Sirial Number
             </th>
             <th className="w-80 py-4 px-4 border-b border-neutral-100 dark:border-neutral-800 text-neutral-500 dark:text-zinc-400 font-bold text-xs">
               Trip Title

@@ -13,10 +13,10 @@ import {
 
 export default function AboutHero() {
   return (
-    // section-bg ব্যবহার করা হয়েছে যা গ্লোবাল সিএসএস থেকে ব্যাকগ্রাউন্ড কালার নিবে
+    
     <section className=" transition-colors duration-300">
       <div className="app-container py-12 md:py-16">
-        {/* Breadcrumb - টেক্সট কালার গ্লোবাল ক্লাস থেকে */}
+        
         <nav className="flex items-center gap-2 text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-8">
           <Link
             href="/"
@@ -37,7 +37,7 @@ export default function AboutHero() {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-black tracking-tight text-primary leading-[1.1]">
-              About NextJourney
+              Redefining How You Explore the World
             </h1>
 
             <p className="text-sm font-medium leading-relaxed text-secondary max-w-xl">
@@ -55,7 +55,7 @@ export default function AboutHero() {
                   val: "10K+",
                   label: "Happy Travelers",
                 },
-                { icon: <FiGlobe />, val: "500+", label: "Destinations" },
+                { icon: <FiGlobe />, val: "100+", label: "Destinations" },
                 { icon: <FiStar />, val: "99%", label: "Satisfaction" },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col gap-2">
@@ -78,7 +78,7 @@ export default function AboutHero() {
           {/* Right Column: Image */}
           <div className="lg:col-span-6 relative w-full h-[400px] rounded-[2rem] overflow-hidden border border-zinc-100 dark:border-zinc-800">
             <img
-              src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=2070"
+              src="./images/about-banner.jpg"
               alt="Travel"
               className="w-full h-full object-cover"
             />

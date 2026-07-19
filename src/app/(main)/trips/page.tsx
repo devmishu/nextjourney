@@ -38,7 +38,7 @@ interface PageProps {
 
 /* -- Page -- */
 export default async function TripsPage({ searchParams }: PageProps) {
-  // Next.js 16+ এর নিয়ম অনুযায়ী searchParams প্রোমিসটিকে আনর‍্যাপ করার জন্য await করা হলো
+ 
   const resolvedSearchParams = await searchParams;
 
   // Server‑side fetch using the incoming query parameters
@@ -46,7 +46,7 @@ export default async function TripsPage({ searchParams }: PageProps) {
   let initialTotal = 0;
 
   try {
-    // এখানে সরাসরি searchParams না পাঠিয়ে await করা resolvedSearchParams পাঠানো হয়েছে
+   
     const queryString = buildServerQuery(resolvedSearchParams);
     const data = await getTrips(queryString);
     initialTrips = data.result;
@@ -58,7 +58,7 @@ export default async function TripsPage({ searchParams }: PageProps) {
   return (
     <>
       <HeroSection />
-      <TripsClientShell
+      <TripsClientShell 
         initialTrips={initialTrips}
         initialTotal={initialTotal}
       />

@@ -99,23 +99,23 @@ export function AddTripForm({ userName, action }: AddTripFormProps) {
     const formData = new FormData(e.currentTarget);
 
     try {
-      // সার্ভার অ্যাকশন কল করুন
+     
       await action(formData);
 
-      // যদি রেজাল্ট সফল হয়
+      
       toast.success("Trip added successfully! ✈️");
       
-      // ফর্ম রিসেট বা অন্যান্য কাজ এখানে করুন
+     
       formRef.current?.reset();
     } catch (error) {
-      // যদি কোনো এরর হয়
+     
       console.error(error);
     } finally {
       setIsPending(false);
     }
   };
 
-  // ইমেজ চেকিং কন্ডিশন সহজ করা হয়েছে
+ 
   const previewImageValid =
     preview.imageUrl && preview.imageUrl.trim().length > 10;
 
@@ -556,8 +556,7 @@ export function AddTripForm({ userName, action }: AddTripFormProps) {
               {/* Image area */}
               <div className="relative w-full aspect-[4/3] bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
                 {previewImageValid ? (
-                  // ৩. onError এর ভুল লজিকটি রিমুভ করা হয়েছে যাতে ইমেজ হাইড না হয়ে রিফ্লেক্ট করে
-                  // eslint-disable-next-line @next/next/no-img-element
+                  
                   <img
                     src={preview.imageUrl}
                     alt="Trip cover preview"

@@ -39,10 +39,10 @@ export default async function MyTripsPage() {
         {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-2 text-xs font-medium opacity-60 mb-6 select-none">
           <Link
-            href="/dashboard"
+            href="/"
             className="hover:opacity-100 transition-opacity"
           >
-            Dashboard
+            Home
           </Link>
           <FiChevronRight className="opacity-40" />
           <span className="opacity-100 font-semibold text-emerald-600 dark:text-emerald-400">

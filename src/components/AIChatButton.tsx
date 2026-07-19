@@ -9,7 +9,7 @@ const AIChatButton: React.FC = () => {
   return (
     <>
       <button
-        className="fixed bottom-6 right-6 z-[9999] button-primary !rounded-sm shadow-lg hover:scale-105 transition-transform"
+        className="x-99 fixed bottom-6 right-6  button-primary !rounded-sm shadow-lg hover:scale-105 transition-transform"
         onClick={() => setIsOpen(!isOpen)}
       >
         <MessageCircle size={18} />

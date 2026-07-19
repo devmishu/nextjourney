@@ -19,7 +19,7 @@ export default function BudgetAnalyzer() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
-  // ইনপুট রেফারেন্স ব্যবহার করে ফাইল সিলেক্ট করা নিশ্চিত করা
+ 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -29,7 +29,7 @@ export default function BudgetAnalyzer() {
     formData.append("file", file);
 
     try {
-      // এখানে আপনার এক্সপ্রেস সার্ভারের সঠিক URL টি দিন
+     
       const res = await fetch(`${baseurl}/api/analyze-budget`, {
         method: "POST",
         body: formData,
@@ -43,7 +43,7 @@ export default function BudgetAnalyzer() {
       setData(result);
     } catch (error) {
       console.error("Analysis failed", error);
-      // ইউজারকে এরর মেসেজ দেখানোর জন্য এখানে toast বা state ব্যবহার করতে পারেন
+    
     } finally {
       setLoading(false);
     }
@@ -77,7 +77,7 @@ export default function BudgetAnalyzer() {
               accept=".csv, .xlsx"
             />
 
-            {/* এখানে Button কম্পোনেন্টের বদলে label ট্যাগ ব্যবহার করা হয়েছে */}
+            
             <label
               htmlFor="fileInput"
               className="inline-flex items-center justify-center px-6 py-2 bg-primary text-primary-foreground rounded-lg cursor-pointer font-bold hover:opacity-90 transition-opacity"

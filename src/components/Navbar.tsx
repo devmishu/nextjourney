@@ -18,12 +18,11 @@ export function Navbar() {
   const { data: session, isPending } = useSession();
   const user = session?.user;
 
-  // Hydration Error এড়াতে এবং ক্লায়েন্ট সাইড রেন্ডারিং নিশ্চিত করতে
+ 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // মোবাইল মেনু খোলা থাকলে বডির স্ক্রল লক করা
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -183,21 +182,17 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* 
-        [FIX] Mobile Drawer Menu: 
-        হেডার ট্যাগের বাইরে সম্পূর্ণ আলাদাভাবে রেন্ডার করা হয়েছে 
-        যাতে প্যারেন্ট এলিমেন্টের backdrop-blur এটিকে ট্রান্সপারেন্ট করতে না পারে।
-      */}
+      
       {mounted && isMobileMenuOpen && (
         <>
           {/* Overlay Behind Drawer */}
           <div
-            className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-xs transition-opacity duration-300 md:hidden"
+            className="fixed inset-0 z-100 bg-black/60 backdrop-blur-xs transition-opacity duration-300 md:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
           {/* Solid Isolated Side Drawer */}
-          <div className="fixed top-0 right-0 bottom-0 z-[101] w-[80%] max-w-sm bg-white dark:bg-[#09090b] p-6 flex flex-col gap-6 shadow-2xl transition-transform duration-300 ease-in-out border-l border-zinc-100 dark:border-zinc-900 md:hidden">
+          <div className="fixed top-0 right-0 bottom-0 z-[101] w-[80%] max-w-sm bg-white dark:bg-[#09090b] p-6 flex flex-col gap-6 shadow-2xl transition-transform duration-300 ease-in-out border-l border-zinc-100 dark:border-zinc-900 md:hidden pb-24">
             {/* Drawer Header */}
             <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-900">
               <span className="text-zinc-900 dark:text-zinc-50 font-extrabold text-lg tracking-tight">

@@ -10,7 +10,7 @@ import {
   FiDollarSign,
   FiFileText,
 } from "react-icons/fi";
-// আপনার এপিআই মেথডের সঠিক পাথ অনুযায়ী এটি ইমপোর্ট নিশ্চিত করে নিবেন:
+
 import { getSingleTrips } from "@/lib/apis/trips";
 
 export interface TripData {
@@ -45,10 +45,10 @@ function formatDate(dateStr: string): string {
 }
 
 export default async function TripDetailsPage({ params }: PageProps) {
-  // Next.js ১৬+ এর নিয়ম অনুযায়ী প্রথমে params আনর‍্যাপ করতে হবে
+
   const resolvedParams = await params;
 
-  // আপনার এপিআই ফাংশনে আইডি পাস করে ডেটা কল করা হলো
+ 
   const trip: TripData = await getSingleTrips(resolvedParams.id);
 
   return (

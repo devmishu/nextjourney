@@ -16,13 +16,13 @@ interface TripData {
     location: string;
 }
 
-export interface EventResponse {
+export interface TripResponse {
   result: TripData[];
   total: number;
 }
 
-export const getTrips = async (quaryString:string | null):Promise<EventResponse> => {
-    return serverFetch<EventResponse>(`/api/trips?${quaryString}`);
+export const getTrips = async (quaryString:string | null):Promise<TripResponse> => {
+    return serverFetch<TripResponse>(`/api/trips?${quaryString}`);
 } 
 
 

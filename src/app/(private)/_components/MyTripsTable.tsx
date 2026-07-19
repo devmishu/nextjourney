@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { AlertDialog, Button } from "@heroui/react";
-import { FiEye, FiTrash2, FiMapPin, FiCalendar } from "react-icons/fi";
-import { TripData } from "../page";
+import { FiEye, FiMapPin, FiCalendar } from "react-icons/fi";
+import { TripData } from "../my-trips/page";
 import { MdDeleteOutline } from "react-icons/md";
 
 interface MyTripsTableProps {
@@ -34,9 +34,7 @@ export default function MyTripsTable({
             <th className="py-4 px-4 border-b border-neutral-100 dark:border-neutral-800 text-neutral-500 dark:text-zinc-400 font-bold text-xs">
               Budget
             </th>
-            <th className="py-4 px-4 border-b border-neutral-100 dark:border-neutral-800 text-neutral-500 dark:text-zinc-400 font-bold text-xs">
-              Status
-            </th>
+           
             <th className="text-center py-4 px-4 border-b border-neutral-100 dark:border-neutral-800 rounded-r-2xl text-neutral-500 dark:text-zinc-400 font-bold text-xs">
               Actions
             </th>
@@ -97,18 +95,7 @@ export default function MyTripsTable({
                   ${trip.price?.toLocaleString()}
                 </td>
 
-                {/* Status Badge Column */}
-                <td className="py-4 px-4 border-b border-neutral-100/50 dark:border-neutral-800/50 text-sm align-middle">
-                  <span
-                    className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold ${
-                      isCompleted
-                        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400"
-                        : "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
-                    }`}
-                  >
-                    {isCompleted ? "Completed" : "Upcoming"}
-                  </span>
-                </td>
+               
 
                 {/* Actions Button Column */}
                 <td className="py-4 px-4 border-b border-neutral-100/50 dark:border-neutral-800/50 text-sm align-middle">
@@ -123,10 +110,8 @@ export default function MyTripsTable({
 
                     <AlertDialog>
                       <Button
-                        variant="bordered"
+                        variant="outline"
                         size="sm"
-                        radius="lg"
-                        startContent={<FiTrash2 className="text-xs" />}
                         className="h-9 px-3 border border-red-200 dark:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-950/20 text-red-600 dark:text-red-400 font-bold text-xs rounded-xl transition-colors duration-150"
                       >
                         <MdDeleteOutline className="text-xs" />

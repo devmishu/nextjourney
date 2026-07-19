@@ -18,6 +18,7 @@ interface TripData {
 }
 
 export const createTrip = async (newTrip: TripData) => {
+    revalidatePath('/my-trips')
     return serverMutation('/api/trips', newTrip, 'POST');
 }
 

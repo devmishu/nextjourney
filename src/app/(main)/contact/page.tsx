@@ -157,20 +157,15 @@ export default function ContactPage() {
                     <label className="w-full text-xs font-bold text-zinc-800 dark:text-zinc-200">
                       Your Name
                     </label>
-                    <Input
-                      disabled={isSubmitted}
-                      type="text"
-                      placeholder="Enter your name"
-                      variant="bordered"
-                      radius="xl"
-                      startContent={
-                        <FiUser className="text-zinc-400 text-sm shrink-0" />
-                      }
-                      classNames={{
-                        inputWrapper:
-                          "border-zinc-200 dark:border-zinc-800 bg-transparent h-11 w-full",
-                      }}
-                    />
+                    <div className="flex items-center gap-2 border border-zinc-200 dark:border-zinc-800 bg-transparent h-11 w-full rounded-xl px-3">
+                      <FiUser className="text-zinc-400 text-sm shrink-0" />
+                      <Input
+                        disabled={isSubmitted}
+                        type="text"
+                        placeholder="Enter your name"
+                        className="border-none bg-transparent outline-none w-full h-full text-sm"
+                      />
+                    </div>
                   </div>
 
                   {/* Email Field */}
@@ -178,20 +173,15 @@ export default function ContactPage() {
                     <label className="w-full text-xs font-bold text-zinc-800 dark:text-zinc-200">
                       Your Email
                     </label>
-                    <Input
-                      disabled={isSubmitted}
-                      type="email"
-                      placeholder="Enter your email"
-                      variant="bordered"
-                      radius="xl"
-                      startContent={
-                        <FiMail className="text-zinc-400 text-sm shrink-0" />
-                      }
-                      classNames={{
-                        inputWrapper:
-                          "border-zinc-200 dark:border-zinc-800 bg-transparent h-11 w-full",
-                      }}
-                    />
+                    <div className="flex items-center gap-2 border border-zinc-200 dark:border-zinc-800 bg-transparent h-11 w-full rounded-xl px-3">
+                      <FiMail className="text-zinc-400 text-sm shrink-0" />
+                      <Input
+                        disabled={isSubmitted}
+                        type="email"
+                        placeholder="Enter your email"
+                        className="border-none bg-transparent outline-none w-full h-full text-sm"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -200,20 +190,15 @@ export default function ContactPage() {
                   <label className="w-full text-xs font-bold text-zinc-800 dark:text-zinc-200">
                     Subject
                   </label>
-                  <Input
-                    disabled={isSubmitted}
-                    type="text"
-                    placeholder="Enter subject"
-                    variant="bordered"
-                    radius="xl"
-                    startContent={
-                      <FiBookOpen className="text-zinc-400 text-sm shrink-0" />
-                    }
-                    classNames={{
-                      inputWrapper:
-                        "border-zinc-200 dark:border-zinc-800 bg-transparent h-11 w-full",
-                    }}
-                  />
+                  <div className="flex items-center gap-2 border border-zinc-200 dark:border-zinc-800 bg-transparent h-11 w-full rounded-xl px-3">
+                    <FiBookOpen className="text-zinc-400 text-sm shrink-0" />
+                    <Input
+                      disabled={isSubmitted}
+                      type="text"
+                      placeholder="Enter subject"
+                      className="border-none bg-transparent outline-none w-full h-full text-sm"
+                    />
+                  </div>
                 </div>
 
                 {/* Message Field */}
@@ -222,23 +207,15 @@ export default function ContactPage() {
                     Your Message
                   </label>
                   <div className="relative w-full">
-                    <TextArea
-                      fullWidth
-                      disabled={isSubmitted}
-                      placeholder="Write your message here..."
-                      variant="bordered"
-                      radius="xl"
-                      rows={5}
-                      minRows={5}
-                      startContent={
-                        <FiMessageSquare className="text-zinc-400 text-sm shrink-0 mt-0.5" />
-                      }
-                      classNames={{
-                        base: "w-full", // এটি পুরো কম্পোনেন্টটিকে ফুল উইডথ করবে
-                        inputWrapper:
-                          "border-zinc-200 dark:border-zinc-800 bg-transparent py-3 w-full",
-                      }}
-                    />
+                    <div className="flex gap-2 border border-zinc-200 dark:border-zinc-800 bg-transparent w-full rounded-xl px-3 py-3">
+                      <FiMessageSquare className="text-zinc-400 text-sm shrink-0 mt-0.5" />
+                      <TextArea
+                        disabled={isSubmitted}
+                        placeholder="Write your message here..."
+                        rows={5}
+                        className="border-none bg-transparent outline-none w-full text-sm resize-none"
+                      />
+                    </div>
                     <span className="absolute right-4 bottom-3 text-[10px] font-medium text-zinc-400 dark:text-zinc-500 tabular-nums select-none z-10">
                       0/1000
                     </span>
@@ -248,9 +225,8 @@ export default function ContactPage() {
                 {/* Dynamic Action Button */}
                 <div className="pt-2 w-full">
                   <Button
-                    disabled={isSubmitted}
+                    isDisabled={isSubmitted}
                     type="submit"
-                    radius="xl"
                     className={`w-full h-12 text-sm font-bold text-white transition-all duration-200 flex items-center justify-center gap-2 ${
                       isSubmitted
                         ? "bg-zinc-200 text-zinc-400 border border-zinc-300 dark:bg-zinc-800 dark:text-zinc-600 dark:border-zinc-700 cursor-not-allowed"

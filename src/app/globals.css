@@ -87,9 +87,14 @@
     @apply fixed inset-0 z-50 bg-black/45 backdrop-blur-xs transition-opacity duration-300 md:hidden;
   }
 
+
   .mobile-drawer {
-    @apply fixed top-0 right-0 bottom-0 z-50 w-3/4 max-w-xs bg-white dark:bg-zinc-900 p-6 flex flex-col gap-6 shadow-2xl transition-transform duration-300 ease-in-out md:hidden border-l border-zinc-100 dark:border-zinc-800;
+    @apply fixed top-0 right-0 bottom-0 z-50 w-3/4 max-w-xs bg-white dark:bg-zinc-950 p-6 flex flex-col gap-6 shadow-2xl transition-transform duration-300 ease-in-out md:hidden border-l border-zinc-100 dark:border-zinc-800;
   }
+
+  .dark .mobile-drawer {
+  background-color: #09090b !important; /* জিংক-৯৫৩ */
+}
 
   /* Logo Icon */
   .logo-icon {
